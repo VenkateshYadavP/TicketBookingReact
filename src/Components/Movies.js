@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import MoviePoster from './MoviePoster';
 import MoviePopup from "./MoviePopUp";
+import { Actions } from "react-native-router-flux";
 class Movies extends Component {
     _keyExtractor = (item, index) => index.toString();
 
@@ -43,6 +44,15 @@ class Movies extends Component {
         });
     }
     
+    bookTicket = () => {
+        if (!this.state.chosenTime) {
+          alert('Please select show time');
+        } else {
+          this.closeMovie();
+          Actions.Confirmation();
+        }
+      }
+
     render() {
         return (
             <View>
@@ -56,6 +66,7 @@ class Movies extends Component {
             movie={this.state.movie}
             isOpen={this.state.popupIsOpen}
             onClose={this.closeMovie}
+            onBook={this.bookTicket}
             />
             </View>
         );
